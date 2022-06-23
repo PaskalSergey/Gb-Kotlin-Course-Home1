@@ -10,9 +10,22 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val button : AppCompatButton = findViewById(R.id.btn_example)
-        button.setOnClickListener{
-            Toast.makeText(this, "Зафиксировал нажатие на кнопку", Toast.LENGTH_SHORT).show()
+        val info = InfoTraining("Урок 1) Введение в Kotlin", "21.06.2022")
+        val buttonDate: AppCompatButton = findViewById(R.id.btn_example_date)
+        val buttonTitle: AppCompatButton = findViewById(R.id.btn_example_title)
+
+        buttonTitle.setOnClickListener {
+            Toast.makeText(this, info.title, Toast.LENGTH_SHORT).show()
         }
+        buttonDate.setOnClickListener {
+            Toast.makeText(this, info.date, Toast.LENGTH_SHORT).show()
+        }
+
+
+
+
     }
+
+    data class InfoTraining(val title: String, val date: String)
+
 }
