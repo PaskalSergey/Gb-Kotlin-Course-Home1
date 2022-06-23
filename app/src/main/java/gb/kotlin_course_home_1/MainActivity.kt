@@ -11,6 +11,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val info = InfoTraining("Урок 1) Введение в Kotlin", "21.06.2022")
+        val objectTraining = info.copy()
         val buttonDate: AppCompatButton = findViewById(R.id.btn_example_date)
         val buttonTitle: AppCompatButton = findViewById(R.id.btn_example_title)
 
@@ -18,11 +19,8 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, info.title, Toast.LENGTH_SHORT).show()
         }
         buttonDate.setOnClickListener {
-            Toast.makeText(this, info.date, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, objectTraining.date, Toast.LENGTH_SHORT).show()
         }
-
-
-
 
     }
 
