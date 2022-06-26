@@ -3,31 +3,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/text_view_fun_example"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_example_title"
+        android:id="@+id/text_view_city_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Показать тему урока" />
+        android:layout_marginTop="50dp"
+        android:padding="16dp"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        tools:text="Донецк"
+        android:text="Донецк" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_example_date"
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/text_view_temperature_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            tools:text="30°"
+            android:text="30°"
+            android:textColor="@color/black"
+            android:textSize="50sp"/>
+
+        <ImageView
+            android:layout_gravity="center_horizontal"
+            tools:src="@drawable/ic_launcher_background"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_view_kind_of_weather"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Показать дату урока" />
+        tools:text="Облачно с прояснениями"
+        android:text="Облачно с прояснениями"
+        android:textColor="@color/black"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_example_cycles"
+    <TextView
+        android:id="@+id/text_view_feeling_of_weather"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Проверить циклы" />
+        tools:text="Ощущается как 25°"
+        android:text="Ощущается как 25°"/>
 
 </LinearLayout>
