@@ -20,8 +20,8 @@ class MainActivity : AppCompatActivity() {
         val buttonCycles: AppCompatButton = findViewById(R.id.btn_example_cycles)
 
         fun cyclesTraining(counter: Int) {
-            var range = 1..10
-            var numbers: ArrayList<Int> = arrayListOf()
+            val range = 1..10
+            val numbers: ArrayList<Int> = arrayListOf()
 
             // Цикл for
             if (counter % 2 == 0) {
