@@ -1,5 +1,6 @@
 package gb.kotlin_course_home_1.view
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -39,18 +40,15 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(DetailsFragmentViewModel::class.java)
-        viewModel.liveData.observe(viewLifecycleOwner, object : Observer<AppState> {
+        viewModel.getLiveData().observe(viewLifecycleOwner, object : Observer<AppState> {
             override fun onChanged(t: AppState) {
                 renderData(t)
             }
         })
         viewModel.sendRequest()
-        binding?.fragmentWeatherTextViewCityName?.text = "Донецк"
-        binding?.fragmentWeatherTextViewFeelingOfWeather?.text = "Ощущается как 30°"
-        binding?.fragmentWeatherTextViewKindOfWeather?.text = "Облачно с прояснениями"
-        binding?.fragmentWeatherTextViewTemperatureValue?.text = "35°"
     }
 
+    @SuppressLint("SetTextI18n")
     private fun renderData(appState: AppState) {
         when (appState) {
             is AppState.Error -> {
@@ -60,12 +58,17 @@ class DetailsFragment : Fragment() {
                 showToast("Идет загрузка, подождите")
             }
             is AppState.Success -> {
-                showToast("Успешная загрузка")
+                val result = appState.weatherData
+                binding?.fragmentWeatherTextViewCityName?.text = result.city.name
+                binding?.fragmentWeatherTextViewFeelingOfWeather?.text = "Ощущается как ${result.feelsLike}°"
+                binding?.fragmentWeatherTextViewKindOfWeather?.text = result.kindOfWeather
+                binding?.fragmentWeatherTextViewTemperatureValue?.text =
+                    "${result.temperature}°"
             }
         }
     }
 
-    private fun showToast(message: String) {
+    fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT)
             .show()
     }
