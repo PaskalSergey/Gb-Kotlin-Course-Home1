@@ -39,16 +39,35 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(DetailsFragmentViewModel::class.java)
-        viewModel.liveData.observe(viewLifecycleOwner, object : Observer<AppState>{
-            override fun onChanged(t: AppState?) {
-                Toast.makeText(requireContext(), "liveData сохранена", Toast.LENGTH_SHORT).show()
+        viewModel.liveData.observe(viewLifecycleOwner, object : Observer<AppState> {
+            override fun onChanged(t: AppState) {
+                renderData(t)
             }
         })
         viewModel.sendRequest()
-        binding?.fragmentWeatherTextViewCityName?.text  = "Донецк"
+        binding?.fragmentWeatherTextViewCityName?.text = "Донецк"
         binding?.fragmentWeatherTextViewFeelingOfWeather?.text = "Ощущается как 30°"
         binding?.fragmentWeatherTextViewKindOfWeather?.text = "Облачно с прояснениями"
         binding?.fragmentWeatherTextViewTemperatureValue?.text = "35°"
+    }
+
+    private fun renderData(appState: AppState) {
+        when (appState) {
+            is AppState.Error -> {
+                showToast("Не удалось загрузить, ошибка")
+            }
+            AppState.Loading -> {
+                showToast("Идет загрузка, подождите")
+            }
+            is AppState.Success -> {
+                showToast("Успешная загрузка")
+            }
+        }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT)
+            .show()
     }
 
 }
