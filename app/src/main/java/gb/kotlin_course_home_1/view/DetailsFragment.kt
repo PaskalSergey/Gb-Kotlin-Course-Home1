@@ -16,7 +16,8 @@ import gb.kotlin_course_home_1.viewmodel.DetailsFragmentViewModel
 class DetailsFragment : Fragment() {
 
     private var _binding: FragmentWeatherDetailsBinding? = null
-    private val binding get() = _binding
+    private val binding get() = _binding!!
+
     lateinit var viewModel: DetailsFragmentViewModel
 
     companion object {
@@ -27,9 +28,9 @@ class DetailsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentWeatherDetailsBinding.inflate(inflater, container, false)
-        return binding?.root
+        return binding.root
     }
 
     override fun onDestroyView() {
@@ -59,16 +60,16 @@ class DetailsFragment : Fragment() {
             }
             is AppState.Success -> {
                 val result = appState.weatherData
-                binding?.fragmentWeatherTextViewCityName?.text = result.city.name
-                binding?.fragmentWeatherTextViewFeelingOfWeather?.text = "Ощущается как ${result.feelsLike}°"
-                binding?.fragmentWeatherTextViewKindOfWeather?.text = result.kindOfWeather
-                binding?.fragmentWeatherTextViewTemperatureValue?.text =
+                binding.fragmentWeatherTextViewCityName.text = result.city.name
+                binding.fragmentWeatherTextViewFeelingOfWeather.text = "Ощущается как ${result.feelsLike}°"
+                binding.fragmentWeatherTextViewKindOfWeather.text = result.kindOfWeather
+                binding.fragmentWeatherTextViewTemperatureValue.text =
                     "${result.temperature}°"
             }
         }
     }
 
-    fun showToast(message: String) {
+    private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT)
             .show()
     }

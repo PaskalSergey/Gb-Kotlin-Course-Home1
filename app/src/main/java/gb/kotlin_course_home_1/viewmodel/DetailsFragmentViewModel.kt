@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import gb.kotlin_course_home_1.model.Repository
 import gb.kotlin_course_home_1.model.RepositoryLocalImpl
 import gb.kotlin_course_home_1.model.RepositoryRemoteImpl
+import gb.kotlin_course_home_1.view.DetailsFragment
 import kotlin.random.Random
 
 class DetailsFragmentViewModel(
@@ -29,12 +30,15 @@ class DetailsFragmentViewModel(
 
     fun sendRequest() {
         liveData.value = AppState.Loading
-        if (Random.nextInt(1, 2) == 2) {
-            liveData.postValue(AppState.Error(throw IllegalStateException("Ошибка")))
-        } else {
-            liveData.postValue(AppState.Success(repository.getWeather("Донецк")))
-        }
+        Thread {
+            Thread.sleep(3000L)
+            if ((0..3).random(Random(System.currentTimeMillis())) == 10) {
+                liveData.postValue(AppState.Error(IllegalStateException("Ошибка")))
+            } else {
+                liveData.postValue(AppState.Success(repository.getWeather("Донецк")))
+            }
 
+        }.start()
     }
 
     private fun isConnection(): Boolean {
