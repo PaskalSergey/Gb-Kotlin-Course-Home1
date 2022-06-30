@@ -12,7 +12,10 @@ android {
         targetSdk 32
         versionCode 1
         versionName "1.0"
-        
+    }
+
+    buildFeatures {
+        viewBinding true
     }
 
     buildTypes {
@@ -36,5 +39,6 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.databinding:databinding-runtime:4.2.2'
 
 }
