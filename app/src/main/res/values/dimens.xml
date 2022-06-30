@@ -6,4 +6,11 @@
     <dimen name="temperature_text_size">50sp</dimen>
     <dimen name="progress_bar_margin_top">80dp</dimen>
     <dimen name="weather_image_size">50dp</dimen>
+    <dimen name="layout_margin">8dp</dimen>
+    <dimen name="card_corner_radius">15dp</dimen>
+    <dimen name="card_elevation">5dp</dimen>
+    <dimen name="content_padding">12dp</dimen>
+    <dimen name="image_view_size">30dp</dimen>
+    <dimen name="card_text_margin_start">8dp</dimen>
+    <dimen name="card_end_text_margin_start">150dp</dimen>
 </resources>

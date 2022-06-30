@@ -2,18 +2,16 @@ package gb.kotlin_course_home_1.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import gb.kotlin_course_home_1.model.Repository
-import gb.kotlin_course_home_1.model.RepositoryLocalImpl
-import gb.kotlin_course_home_1.model.RepositoryRemoteImpl
-import gb.kotlin_course_home_1.view.DetailsFragment
+import gb.kotlin_course_home_1.model.*
 import kotlin.random.Random
 
-class DetailsFragmentViewModel(
+class WeatherListViewModel(
     private val liveData: MutableLiveData<AppState> = MutableLiveData<AppState>()
 ) :
     ViewModel() {
 
-    lateinit var repository: Repository
+    lateinit var repositorySets: RepositorySets
+    lateinit var repositoryOne: RepositoryOne
 
     fun getLiveData(): MutableLiveData<AppState> {
         choiceRepository()
@@ -21,21 +19,30 @@ class DetailsFragmentViewModel(
     }
 
     private fun choiceRepository() {
-        repository = if (isConnection()) {
+        repositoryOne = if (isConnection()) {
             RepositoryRemoteImpl()
         } else {
             RepositoryLocalImpl()
         }
+        repositorySets = RepositoryLocalImpl()
     }
 
-    fun sendRequest() {
+    fun getWeatherListForRussia(){
+        sendRequest(Location.Russian)
+    }
+
+    fun getWeatherListForWorld(){
+        sendRequest(Location.World)
+    }
+
+    private fun sendRequest(location: Location) {
         liveData.value = AppState.Loading
         Thread {
             Thread.sleep(3000L)
             if ((0..3).random(Random(System.currentTimeMillis())) == 10) {
                 liveData.postValue(AppState.Error(IllegalStateException("Ошибка")))
             } else {
-                liveData.postValue(AppState.Success(repository.getWeather("Донецк")))
+                liveData.postValue(AppState.SuccessMulti(repositorySets.getListWeather(location)))
             }
 
         }.start()
