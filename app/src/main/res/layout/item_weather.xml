@@ -28,20 +28,23 @@
             android:id="@+id/cityName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginStart="@dimen/card_text_margin_start"
+            android:layout_weight="1"
             android:textColor="@color/black"
-            android:textSize="@dimen/city_text_size"
-            android:textStyle="italic|bold"
+            android:textSize="@dimen/card_city_text_size"
+            android:textStyle="italic"
             tools:text="Донецк" />
 
         <TextView
+            android:padding="8dp"
             android:id="@+id/temperature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/card_end_text_margin_start"
+            android:layout_weight="1"
             android:textColor="@color/black"
-            android:textSize="@dimen/city_text_size"
-            android:textStyle="bold"
+            android:textSize="@dimen/card_city_text_size"
+
             tools:text="30°" />
 
     </LinearLayout>

@@ -28,7 +28,7 @@ class WeatherListAdapter(private val dataList: List<Weather>) :
         fun bind(weather: Weather) {
             val binding = ItemWeatherBinding.bind(itemView)
             binding.cityName.text = weather.city.name
-            binding.temperature.text = weather.temperature.toString()
+            binding.temperature.text = "${weather.temperature.toString()}°"
         }
     }
 

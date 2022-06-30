@@ -57,10 +57,10 @@ class DetailsFragment : Fragment() {
             }
             AppState.Loading -> {
                 showToast("Идет загрузка, подождите")
-                binding.loadingLayout.visibility = View.VISIBLE
+             //   binding.loadingLayout.visibility = View.VISIBLE
             }
             is AppState.SuccessOne -> {
-                binding.loadingLayout.visibility = View.GONE
+            //    binding.loadingLayout.visibility = View.GONE
                 val result = appState.weatherData
                 binding.fragmentWeatherTextViewCityName.text = result.city.name
                 binding.fragmentWeatherTextViewFeelingOfWeather.text = "Ощущается как ${result.feelsLike}°"

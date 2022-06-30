@@ -50,9 +50,9 @@ class WeatherListFragment : Fragment() {
             }
         })
 
-        binding.fragmentWeatherBtnSwitch.setOnClickListener{
+        binding.fragmentWeatherBtnSwitch.setOnClickListener {
             isRussian = !isRussian
-            if (isRussian){
+            if (isRussian) {
                 viewModel.getWeatherListForRussia()
             } else {
                 viewModel.getWeatherListForWorld()
@@ -72,10 +72,11 @@ class WeatherListFragment : Fragment() {
                 binding.loadingLayout.visibility = View.VISIBLE
             }
             is AppState.SuccessOne -> {
-
+                val result = appState.weatherData
             }
 
             is AppState.SuccessMulti -> {
+                binding.loadingLayout.visibility = View.GONE
                 binding.mainFragmentRecyclerView.adapter = WeatherListAdapter(appState.weatherData)
             }
         }
