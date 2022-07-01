@@ -1,15 +1,20 @@
 package gb.kotlin_course_home_1.domain
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Weather(
     val city: City = getDefaultCity(),
     val temperature: Int = 35,
     val kindOfWeather: String = "Облачно с прояснениями",
     val feelsLike: Int = 30
-)
+) : Parcelable
 
+@Parcelize
 data class City(
     val name: String
-)
+) : Parcelable
 
 fun getDefaultCity() = City("Донецк")
 
