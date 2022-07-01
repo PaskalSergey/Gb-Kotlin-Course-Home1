@@ -1,4 +1,4 @@
-package gb.kotlin_course_home_1.view.weatherdetails
+package gb.kotlin_course_home_1.view.details
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -9,13 +9,15 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import gb.kotlin_course_home_1.databinding.FragmentWeatherDetailsBinding
+import gb.kotlin_course_home_1.MainActivity
+import gb.kotlin_course_home_1.R
 import gb.kotlin_course_home_1.databinding.FragmentWeatherListBinding
-import gb.kotlin_course_home_1.view.weatherlist.WeatherListAdapter
+import gb.kotlin_course_home_1.domain.Weather
+import gb.kotlin_course_home_1.view.list.WeatherListAdapter
 import gb.kotlin_course_home_1.viewmodel.AppState
 import gb.kotlin_course_home_1.viewmodel.WeatherListViewModel
 
-class WeatherListFragment : Fragment() {
+class WeatherListFragment : Fragment(), OnItemClick {
 
     companion object {
         fun newInstance() = WeatherListFragment()
@@ -77,7 +79,8 @@ class WeatherListFragment : Fragment() {
 
             is AppState.SuccessMulti -> {
                 binding.loadingLayout.visibility = View.GONE
-                binding.mainFragmentRecyclerView.adapter = WeatherListAdapter(appState.weatherData)
+                binding.mainFragmentRecyclerView.adapter =
+                    WeatherListAdapter(appState.weatherData, this)
             }
         }
     }
@@ -85,6 +88,13 @@ class WeatherListFragment : Fragment() {
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT)
             .show()
+    }
+
+    override fun onItemClick(weather: Weather) {
+        (binding.root.context as MainActivity).supportFragmentManager.beginTransaction().hide(this)
+            .add(
+                R.id.container, DetailsFragment.newInstance(weather)
+            ).addToBackStack("").commit()
     }
 
 }

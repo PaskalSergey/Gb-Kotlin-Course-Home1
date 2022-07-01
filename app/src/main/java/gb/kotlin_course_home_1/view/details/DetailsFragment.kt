@@ -1,18 +1,13 @@
-package gb.kotlin_course_home_1.view.weatherdetails
+package gb.kotlin_course_home_1.view.details
 
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import gb.kotlin_course_home_1.databinding.FragmentWeatherDetailsBinding
 import gb.kotlin_course_home_1.domain.Weather
-import gb.kotlin_course_home_1.viewmodel.AppState
-import gb.kotlin_course_home_1.viewmodel.WeatherListViewModel
 
 class DetailsFragment : Fragment() {
 
@@ -21,10 +16,10 @@ class DetailsFragment : Fragment() {
 
     companion object {
         const val BUNDLE_WEATHER_EXTRA = "BUNDLE_WEATHER_EXTRA"
-        fun newInstance(weather: Weather): WeatherListFragment {
+        fun newInstance(weather: Weather): DetailsFragment {
             val bundle = Bundle()
             bundle.putParcelable(BUNDLE_WEATHER_EXTRA, weather)
-            val frag = WeatherListFragment()
+            val frag = DetailsFragment()
             frag.arguments = bundle
             return frag
         }
