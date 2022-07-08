@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
 import gb.kotlin_course_home_1.MainActivity
 import gb.kotlin_course_home_1.R
 import gb.kotlin_course_home_1.databinding.FragmentWeatherListBinding
@@ -51,11 +52,7 @@ class WeatherListFragment : Fragment(), OnItemClick {
         ) { t -> renderData(t) }
 
         binding.fragmentWeatherBtnSwitch.setOnClickListener {
-            if (isRussian) {
-                viewModel.getWeatherListForRussia()
-            } else {
-                viewModel.getWeatherListForWorld()
-            }.also { isRussian = !isRussian }
+            checkIsRussian()
         }
     }
 
@@ -63,7 +60,11 @@ class WeatherListFragment : Fragment(), OnItemClick {
     private fun renderData(appState: AppState) {
         when (appState) {
             is AppState.Error -> {
-                showToast("Не удалось загрузить, ошибка")
+                isRussian = !isRussian
+                binding.root.showSnackBar(
+                    getString(R.string.error),
+                    getString(R.string.reload)
+                ) { checkIsRussian() }
             }
             AppState.Loading -> {
                 showToast("Идет загрузка, подождите")
@@ -81,6 +82,11 @@ class WeatherListFragment : Fragment(), OnItemClick {
         }
     }
 
+    private fun View.showSnackBar(text: String, actionText: String, action: (View) -> Unit) {
+        Snackbar.make(this, text, Snackbar.LENGTH_LONG)
+            .setAction(actionText, action).show()
+    }
+
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT)
             .show()
@@ -93,4 +99,11 @@ class WeatherListFragment : Fragment(), OnItemClick {
             ).addToBackStack("").commit()
     }
 
+    private fun checkIsRussian() {
+        if (isRussian) {
+            viewModel.getWeatherListForRussia()
+        } else {
+            viewModel.getWeatherListForWorld()
+        }.also { isRussian = !isRussian }
+    }
 }
