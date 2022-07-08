@@ -46,20 +46,16 @@ class WeatherListFragment : Fragment(), OnItemClick {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(WeatherListViewModel::class.java)
-        viewModel.getLiveData().observe(viewLifecycleOwner, object : Observer<AppState> {
-            override fun onChanged(t: AppState) {
-                renderData(t)
-            }
-        })
+        viewModel.getLiveData().observe(
+            viewLifecycleOwner
+        ) { t -> renderData(t) }
 
         binding.fragmentWeatherBtnSwitch.setOnClickListener {
-            isRussian = !isRussian
             if (isRussian) {
                 viewModel.getWeatherListForRussia()
             } else {
                 viewModel.getWeatherListForWorld()
-            }
-            viewModel.getWeatherListForRussia()
+            }.also { isRussian = !isRussian }
         }
     }
 

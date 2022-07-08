@@ -38,7 +38,7 @@ class WeatherListViewModel(
     private fun sendRequest(location: Location) {
         liveData.value = AppState.Loading
         Thread {
-            Thread.sleep(3000L)
+            Thread.sleep(300L)
             if ((0..3).random(Random(System.currentTimeMillis())) == 10) {
                 liveData.postValue(AppState.Error(IllegalStateException("Ошибка")))
             } else {

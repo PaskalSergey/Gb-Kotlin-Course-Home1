@@ -42,19 +42,20 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val weather = arguments?.getParcelable<Weather>(BUNDLE_WEATHER_EXTRA)
-        if (weather != null)
-            renderData(weather)
+        val weather = arguments?.getParcelable<Weather>(BUNDLE_WEATHER_EXTRA)?.let {
+            renderData(it)
+        }
     }
 
     @SuppressLint("SetTextI18n")
     private fun renderData(weather: Weather) {
-        binding.fragmentWeatherTextViewCityName.text = weather.city.name
-        binding.fragmentWeatherTextViewFeelingOfWeather.text =
-            "Ощущается как ${weather.feelsLike}°"
-        binding.fragmentWeatherTextViewKindOfWeather.text = weather.kindOfWeather
-        binding.fragmentWeatherTextViewTemperatureValue.text =
-            "${weather.temperature}°"
+        binding.apply {
+            fragmentWeatherTextViewCityName.text = weather.city.name
+            fragmentWeatherTextViewFeelingOfWeather.text =
+                "Ощущается как ${weather.feelsLike}°"
+            fragmentWeatherTextViewKindOfWeather.text = weather.kindOfWeather
+            fragmentWeatherTextViewTemperatureValue.text =
+                "${weather.temperature}°"
+        }
     }
-
 }
