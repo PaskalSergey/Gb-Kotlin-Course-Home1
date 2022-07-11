@@ -1,5 +1,6 @@
 package gb.kotlin_course_home_1.view.list
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,14 +30,16 @@ class WeatherListAdapter(private val dataList: List<Weather>, private val callba
     }
 
     inner class WeatherViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        @SuppressLint("SetTextI18n")
         fun bind(weather: Weather) {
-            val binding = ItemWeatherBinding.bind(itemView)
-            binding.cityName.text = weather.city.name
-            binding.temperature.text = "${weather.temperature.toString()}°"
-            binding.root.setOnClickListener{
-
-                callback.onItemClick(weather)
+            val binding = ItemWeatherBinding.bind(itemView).apply {
+                cityName.text = weather.city.name
+                temperature.text = "${weather.temperature}°"
+                root.setOnClickListener {
+                    callback.onItemClick(weather)
+                }
             }
+
         }
     }
 
