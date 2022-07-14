@@ -1,6 +1,7 @@
 package gb.kotlin_course_home_1.utils
 
 import com.google.gson.Gson
+import gb.kotlin_course_home_1.BuildConfig
 import gb.kotlin_course_home_1.model.dto.WeatherDTO
 import gb.kotlin_course_home_1.utils.getLines
 import gb.kotlin_course_home_1.view.details.OnResponse
@@ -20,8 +21,7 @@ object WeatherLoader {
         myConnection = uri.openConnection() as HttpURLConnection
         myConnection.readTimeout = 5000
         myConnection.addRequestProperty(
-            "X-Yandex-API-Key",
-            "1c3f7be9-605d-4245-9fb4-3a5338802102"
+            "X-Yandex-API-Key", BuildConfig.WEATHER_API_KEY
         )
         Thread {
             val reader = BufferedReader(InputStreamReader(myConnection.inputStream))
