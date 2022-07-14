@@ -13,9 +13,9 @@ data class Info(
     @SerializedName("_h")
     val h: Boolean,
     @SerializedName("lat")
-    val lat: Int,
+    val lat: Double,
     @SerializedName("lon")
-    val lon: Int,
+    val lon: Double,
     @SerializedName("n")
     val n: Boolean,
     @SerializedName("nr")
@@ -26,8 +26,6 @@ data class Info(
     val nsr: Boolean,
     @SerializedName("p")
     val p: Boolean,
-    @SerializedName("tzinfo")
-    val tzinfo: Tzinfo,
     @SerializedName("url")
     val url: String,
     @SerializedName("zoom")

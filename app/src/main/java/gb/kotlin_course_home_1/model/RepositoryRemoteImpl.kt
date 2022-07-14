@@ -6,11 +6,5 @@ import gb.kotlin_course_home_1.domain.getWorldCity
 import gb.kotlin_course_home_1.viewmodel.AppState
 
 class RepositoryRemoteImpl : RepositoryOne {
-    override fun getWeather(city: String): Weather {
-        Thread {
-            Thread.sleep(200L)
-
-        }.start()
-        return Weather()
-    }
+    override fun getWeather(city: String) = Weather()
 }
