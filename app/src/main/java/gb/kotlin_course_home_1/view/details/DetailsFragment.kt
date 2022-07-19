@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import gb.kotlin_course_home_1.databinding.FragmentWeatherDetailsBinding
 import gb.kotlin_course_home_1.domain.Weather
-import gb.kotlin_course_home_1.model.dto.WeatherDTO
 import gb.kotlin_course_home_1.utils.WeatherLoader
 
 class DetailsFragment : Fragment() {
+
 
     private var _binding: FragmentWeatherDetailsBinding? = null
     private val binding get() = _binding!!
