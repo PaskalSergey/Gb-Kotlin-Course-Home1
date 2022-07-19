@@ -34,7 +34,6 @@ class WeatherListAdapter(private val dataList: List<Weather>, private val callba
         fun bind(weather: Weather) {
             val binding = ItemWeatherBinding.bind(itemView).apply {
                 cityName.text = weather.city.name
-                temperature.text = "${weather.temperature}°"
                 root.setOnClickListener {
                     callback.onItemClick(weather)
                 }
