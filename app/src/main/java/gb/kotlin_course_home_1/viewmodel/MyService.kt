@@ -9,6 +9,9 @@ class MyService : IntentService("") {
     override fun onHandleIntent(intent: Intent?) {
         intent?.let {
             it.getStringExtra(BUNDLE_KEY)
+            sendBroadcast(Intent().apply {
+                action = "answer"
+            })
         }
     }
 }

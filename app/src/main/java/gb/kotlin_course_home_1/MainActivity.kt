@@ -30,11 +30,9 @@ class MainActivity : AppCompatActivity() {
 
         val receiver = MyBroadcastReceiver()
         registerReceiver(receiver, IntentFilter("android.permission.CONNECTIVITY_ACTION"))
-        registerReceiver(receiver, IntentFilter("myaction"))
 
-        sendBroadcast(Intent().apply {
-            action = "myaction"
-        })
+
+
     }
 
 }

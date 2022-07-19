@@ -24,6 +24,10 @@
         </activity>
 
         <service
+            android:name=".view.details.DetailsServiceIntent"
+            android:exported="true" />
+
+        <service
             android:name=".viewmodel.MyService"
             android:exported="true" />
 
@@ -33,7 +37,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.permission.CONNECTIVITY_ACTION" />
-                <action android:name="myaction" />
             </intent-filter>
         </receiver>
 
