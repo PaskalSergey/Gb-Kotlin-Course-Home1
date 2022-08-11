@@ -1,8 +1,11 @@
 package gb.kotlin_course_home_1.model.dto
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Fact(
     @SerializedName("cloudness")
     val cloudness: Double,
@@ -50,4 +53,4 @@ data class Fact(
     val windGust: Double,
     @SerializedName("wind_speed")
     val windSpeed: Double
-)
+) : Parcelable
