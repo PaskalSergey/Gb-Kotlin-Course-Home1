@@ -4,11 +4,9 @@ import gb.kotlin_course_home_1.domain.Weather
 import gb.kotlin_course_home_1.domain.getRussianCity
 import gb.kotlin_course_home_1.domain.getWorldCity
 
-class RepositoryLocalImpl : RepositoryOne, RepositorySets {
+class RepositoryCitiesListImpl : RepositoryCitiesList {
 
-    override fun getWeather(city: String) = Weather()
-
-    override fun getListWeather(location: Location) = when (location) {
+    override fun getListCities(location: Location) = when (location) {
             Location.Russian -> {
                 getRussianCity()
             }

@@ -5,15 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import gb.kotlin_course_home_1.MainActivity
-import gb.kotlin_course_home_1.R
 import gb.kotlin_course_home_1.databinding.ItemWeatherBinding
 import gb.kotlin_course_home_1.domain.Weather
-import gb.kotlin_course_home_1.view.details.DetailsFragment
 import gb.kotlin_course_home_1.view.details.OnItemClick
 
-class WeatherListAdapter(private val dataList: List<Weather>, private val callback: OnItemClick) :
-    RecyclerView.Adapter<WeatherListAdapter.WeatherViewHolder>() {
+class DetailsListAdapter(private val dataList: List<Weather>, private val callback: OnItemClick) :
+    RecyclerView.Adapter<DetailsListAdapter.WeatherViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherViewHolder {
