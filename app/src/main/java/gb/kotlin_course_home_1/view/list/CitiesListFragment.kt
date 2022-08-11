@@ -7,21 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import gb.kotlin_course_home_1.MainActivity
 import gb.kotlin_course_home_1.R
 import gb.kotlin_course_home_1.databinding.FragmentWeatherListBinding
 import gb.kotlin_course_home_1.domain.Weather
-import gb.kotlin_course_home_1.view.list.WeatherListAdapter
-import gb.kotlin_course_home_1.viewmodel.AppState
-import gb.kotlin_course_home_1.viewmodel.WeatherListViewModel
+import gb.kotlin_course_home_1.view.list.DetailsListAdapter
+import gb.kotlin_course_home_1.viewmodel.citieslist.CityListFragmentAppState
+import gb.kotlin_course_home_1.viewmodel.citieslist.CitiesListViewModel
 
-class WeatherListFragment : Fragment(), OnItemClick {
+class CitiesListFragment : Fragment(), OnItemClick {
 
     companion object {
-        fun newInstance() = WeatherListFragment()
+        fun newInstance() = CitiesListFragment()
     }
 
     var isRussian = true
@@ -29,7 +28,7 @@ class WeatherListFragment : Fragment(), OnItemClick {
     private var _binding: FragmentWeatherListBinding? = null
     private val binding get() = _binding!!
 
-    lateinit var viewModel: WeatherListViewModel
+    lateinit var viewModel: CitiesListViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,7 +45,7 @@ class WeatherListFragment : Fragment(), OnItemClick {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(WeatherListViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(CitiesListViewModel::class.java)
         viewModel.getLiveData().observe(
             viewLifecycleOwner
         ) { t -> renderData(t) }
@@ -57,27 +56,27 @@ class WeatherListFragment : Fragment(), OnItemClick {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun renderData(appState: AppState) {
+    private fun renderData(appState: CityListFragmentAppState) {
         when (appState) {
-            is AppState.Error -> {
+            is CityListFragmentAppState.Error -> {
                 isRussian = !isRussian
                 binding.root.showSnackBar(
                     getString(R.string.error),
                     getString(R.string.reload)
                 ) { checkIsRussian() }
             }
-            AppState.Loading -> {
+            CityListFragmentAppState.Loading -> {
                 showToast("Идет загрузка, подождите")
                 binding.loadingLayout.visibility = View.VISIBLE
             }
-            is AppState.SuccessOne -> {
+            is CityListFragmentAppState.SuccessOne -> {
                 val result = appState.weatherData
             }
 
-            is AppState.SuccessMulti -> {
+            is CityListFragmentAppState.SuccessMulti -> {
                 binding.loadingLayout.visibility = View.GONE
                 binding.mainFragmentRecyclerView.adapter =
-                    WeatherListAdapter(appState.weatherData, this)
+                    DetailsListAdapter(appState.weatherData, this)
             }
         }
     }
