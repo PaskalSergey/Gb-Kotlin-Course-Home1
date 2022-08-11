@@ -29,12 +29,11 @@
             android:textSize="@dimen/temperature_text_size"
             tools:text="30°" />
 
-        <ImageView
-            android:id="@+id/fragment_weather__image_view_icon_weather"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/icon"
             android:layout_width="@dimen/weather_image_size"
             android:layout_height="@dimen/weather_image_size"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/ic_baseline_cloud_queue_24"
             tools:src="@drawable/ic_baseline_cloud_queue_24" />
 
     </LinearLayout>

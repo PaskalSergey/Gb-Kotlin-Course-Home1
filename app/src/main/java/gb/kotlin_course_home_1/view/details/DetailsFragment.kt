@@ -5,8 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import coil.ImageLoader
+import coil.decode.SvgDecoder
+import coil.load
+import coil.request.ImageRequest
 import gb.kotlin_course_home_1.databinding.FragmentWeatherDetailsBinding
 import gb.kotlin_course_home_1.domain.Weather
 import gb.kotlin_course_home_1.viewmodel.details.DetailsFragmentAppState
@@ -73,10 +78,29 @@ class DetailsFragment : Fragment() {
                     condition.text = weatherDTO.fact.condition
                     temperatureValue.text =
                         "${weatherDTO.fact.temp}°"
+                    icon.loadUrl("https://yastatic.net/weather/i/icons/funky/dark/${weatherDTO.fact.icon}.svg")
                 }
             }
         }
     }
+
+    fun ImageView.loadUrl(url: String) {
+
+        val imageLoader =
+            ImageLoader.Builder(this.context)
+                .componentRegistry { add(SvgDecoder(this@loadUrl.context)) }
+                .build()
+
+        val request =
+            ImageRequest.Builder(this.context).crossfade(true)
+                .crossfade(500)
+                .data(url)
+                .target(this)
+                .build()
+
+        imageLoader.enqueue(request)
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
