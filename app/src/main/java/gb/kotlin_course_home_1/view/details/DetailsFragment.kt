@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import gb.kotlin_course_home_1.databinding.FragmentWeatherDetailsBinding
 import gb.kotlin_course_home_1.domain.Weather
+import gb.kotlin_course_home_1.model.dto.WeatherDTO
+import gb.kotlin_course_home_1.utils.WeatherLoader
 
 class DetailsFragment : Fragment() {
 
@@ -42,8 +44,23 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val weather = arguments?.getParcelable<Weather>(BUNDLE_WEATHER_EXTRA)?.let {
-            renderData(it)
+        val weather = arguments?.let { arg -> arg.getParcelable<Weather>(BUNDLE_WEATHER_EXTRA) }
+
+        weather?.let { weatherLocal ->
+
+            WeatherLoader.request(
+                weatherLocal.city.lat,
+                weatherLocal.city.lon,
+                "ru_RU"
+            ) { weatherDTO ->
+                requireActivity().runOnUiThread {
+                    renderData(weatherLocal.apply {
+                        weatherLocal.temperature = weatherDTO.fact.temp
+                        weatherLocal.feelsLike = weatherDTO.fact.feelsLike
+                        weatherLocal.kindOfWeather = weatherDTO.fact.condition
+                    })
+                }
+            }
         }
     }
 
@@ -59,3 +76,4 @@ class DetailsFragment : Fragment() {
         }
     }
 }
+
