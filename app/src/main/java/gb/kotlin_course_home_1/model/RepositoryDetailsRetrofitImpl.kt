@@ -1,10 +1,9 @@
 package gb.kotlin_course_home_1.model
 
-import gb.kotlin_course_home_1.domain.Weather
-import gb.kotlin_course_home_1.domain.getDefaultCity
+
 
 class RepositoryDetailsRetrofitImpl : RepositoryDetails {
-    override fun getWeather(lat: Double, lon: Double): Weather {
-        return Weather(getDefaultCity())
+    override fun getWeather(lat: Double, lon: Double, callback: MyLargeSuperCallback) {
+
     }
 }

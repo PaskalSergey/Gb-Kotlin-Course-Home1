@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/fragment_weather__text_view_city_name"
+        android:id="@+id/cityName"
         style="@style/WeatherTextView"
         android:layout_marginTop="@dimen/city_name_margin_top"
         android:padding="@dimen/layout_padding"
@@ -23,7 +23,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/fragment_weather__text_view_temperature_value"
+            android:id="@+id/temperatureValue"
             style="@style/WeatherTextView"
             android:layout_gravity="center_horizontal"
             android:textSize="@dimen/temperature_text_size"
@@ -40,12 +40,12 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/fragment_weather__text_view_kind_of_weather"
+        android:id="@+id/condition"
         style="@style/WeatherTextView"
         tools:text="Облачно с прояснениями" />
 
     <TextView
-        android:id="@+id/fragment_weather__text_view_feeling_of_weather"
+        android:id="@+id/feelsLikeValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="Ощущается как 25°" />
