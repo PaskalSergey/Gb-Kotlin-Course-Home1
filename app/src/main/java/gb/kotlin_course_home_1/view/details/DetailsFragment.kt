@@ -67,12 +67,12 @@ class DetailsFragment : Fragment() {
             is DetailsFragmentAppState.Success -> {
                 with(binding) {
                     val weatherDTO = detailsFragmentAppState.weatherData
-                    cityName.text = weatherLocal.city.name.toString()
+                    cityName.text = weatherLocal.city.name
                     feelsLikeValue.text =
-                        "Ощущается как ${weatherDTO.fact.feelsLike.toString()}°"
-                    condition.text = weatherDTO.fact.condition.toString()
+                        "Ощущается как ${weatherDTO.fact.feelsLike}°"
+                    condition.text = weatherDTO.fact.condition
                     temperatureValue.text =
-                        "${weatherDTO.fact.temp.toString()}°"
+                        "${weatherDTO.fact.temp}°"
                 }
             }
         }
