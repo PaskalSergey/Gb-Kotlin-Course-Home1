@@ -1,11 +1,10 @@
 package gb.kotlin_course_home_1.viewmodel.details
 
-import android.os.Handler
-import android.os.Looper
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import gb.kotlin_course_home_1.model.*
 import gb.kotlin_course_home_1.model.dto.WeatherDTO
+import gb.kotlin_course_home_1.model.retrofit.RepositoryDetailsRetrofitImpl
 import java.io.IOException
 
 class DetailsViewModel(
