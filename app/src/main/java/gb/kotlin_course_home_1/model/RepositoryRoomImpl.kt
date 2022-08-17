@@ -6,12 +6,16 @@ import gb.kotlin_course_home_1.domain.Weather
 import gb.kotlin_course_home_1.model.dto.WeatherDTO
 import gb.kotlin_course_home_1.model.room.WeatherEntity
 
-class RepositoryRoomImpl : RepositoryLocationToOneWeather, RepositoryAddable {
+class RepositoryRoomImpl : RepositoryLocationToOneWeather, RepositoryWeatherAddable {
     override fun getWeather(city: City, lat: Double, lon: Double, callback: MyLargeSuperCallback) {
         callback.onResponse(
             MyApp.getWeatherDatabase().weatherDao().getWeatherByLocation(lat, lon).let {
                 convertHistoryEntityToWeather(it).last()
             })
+    }
+
+    override fun addWeather(weather: Weather) {
+        MyApp.getWeatherDatabase().weatherDao().insert(convertWeatherToEntity(weather))
     }
 
     private fun convertHistoryEntityToWeather(entityList: List<WeatherEntity>): List<Weather> {
@@ -20,12 +24,15 @@ class RepositoryRoomImpl : RepositoryLocationToOneWeather, RepositoryAddable {
         }
     }
 
-    override fun addWeather(weather: Weather) {
-
+    private fun convertWeatherToEntity(weather: Weather): WeatherEntity {
+        return WeatherEntity(
+            0,
+            weather.city.name,
+            weather.city.lat,
+            weather.city.lon,
+            weather.temperature,
+            weather.kindOfWeather,
+            weather.feelsLike
+        )
     }
-
-//    fun convertWeatherToEntity(weather: Weather): WeatherEntity{
-//        return WeatherEntity()
-//    }
-
 }

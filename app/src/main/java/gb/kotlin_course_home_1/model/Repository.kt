@@ -9,7 +9,7 @@ fun interface RepositoryLocationToOneWeather {
     fun getWeather(city: City, lat: Double, lon: Double, callback: MyLargeSuperCallback)
 }
 
-fun interface RepositoryAddable{
+fun interface RepositoryWeatherAddable{
     fun addWeather(weather: Weather)
 
 }
