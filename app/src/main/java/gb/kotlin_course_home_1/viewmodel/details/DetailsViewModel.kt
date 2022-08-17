@@ -2,6 +2,8 @@ package gb.kotlin_course_home_1.viewmodel.details
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import gb.kotlin_course_home_1.domain.City
+import gb.kotlin_course_home_1.domain.Weather
 import gb.kotlin_course_home_1.model.*
 import gb.kotlin_course_home_1.model.dto.WeatherDTO
 import gb.kotlin_course_home_1.model.retrofit.RepositoryDetailsRetrofitImpl
@@ -12,7 +14,7 @@ class DetailsViewModel(
 ) :
     ViewModel() {
 
-    lateinit var repository: RepositoryDetails
+    lateinit var repository: RepositoryLocationToOneWeather
 
     fun getLiveData(): MutableLiveData<DetailsFragmentAppState> {
         choiceRepository()
@@ -20,7 +22,7 @@ class DetailsViewModel(
     }
 
     private fun choiceRepository() {
-        repository = when (2) {
+        repository = when (3) {
             1 -> {
                 RepositoryDetailsRetrofitImpl()
             }
@@ -33,15 +35,15 @@ class DetailsViewModel(
         }
     }
 
-    fun getWeather(lat: Double, lon: Double) {
+    fun getWeather(city: City, lat: Double, lon: Double) {
         choiceRepository()
         liveData.value = DetailsFragmentAppState.Loading
-        repository.getWeather(lat, lon, callback)
+        repository.getWeather(city, lat, lon, callback)
     }
 
     val callback = object : MyLargeSuperCallback{
-        override fun onResponse(weatherDTO: WeatherDTO) {
-            liveData.postValue(DetailsFragmentAppState.Success(weatherDTO))
+        override fun onResponse(weather: Weather) {
+            liveData.postValue(DetailsFragmentAppState.Success(weather))
         }
 
         override fun onFailure(e: IOException) {

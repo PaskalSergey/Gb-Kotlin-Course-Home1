@@ -2,9 +2,11 @@ package gb.kotlin_course_home_1.model.retrofit
 
 import com.google.gson.GsonBuilder
 import gb.kotlin_course_home_1.BuildConfig
+import gb.kotlin_course_home_1.domain.City
 import gb.kotlin_course_home_1.model.MyLargeSuperCallback
-import gb.kotlin_course_home_1.model.RepositoryDetails
+import gb.kotlin_course_home_1.model.RepositoryLocationToOneWeather
 import gb.kotlin_course_home_1.model.dto.WeatherDTO
+import gb.kotlin_course_home_1.utils.convertDtoToModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -13,8 +15,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 
 
-class RepositoryDetailsRetrofitImpl : RepositoryDetails {
-    override fun getWeather(lat: Double, lon: Double, callback: MyLargeSuperCallback) {
+class RepositoryDetailsRetrofitImpl : RepositoryLocationToOneWeather {
+    override fun getWeather(city: City, lat: Double, lon: Double, callback: MyLargeSuperCallback) {
         val retrofitImpl = Retrofit.Builder()
         retrofitImpl.baseUrl("https://api.weather.yandex.ru")
         retrofitImpl.addConverterFactory(
@@ -26,8 +28,8 @@ class RepositoryDetailsRetrofitImpl : RepositoryDetails {
         api.getWeather(BuildConfig.WEATHER_API_KEY, lat, lon)
             .enqueue(object : Callback<WeatherDTO> {
                 override fun onResponse(call: Call<WeatherDTO>, response: Response<WeatherDTO>) {
-                    if (response.isSuccessful && response.body() != null){
-                        callback.onResponse(response.body()!!)
+                    if (response.isSuccessful && response.body() != null) {
+                        callback.onResponse(convertDtoToModel(response.body()!!, city))
                     } else {
                         callback.onFailure(IOException())
                     }

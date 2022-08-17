@@ -1,15 +1,21 @@
 package gb.kotlin_course_home_1.model
 
+import gb.kotlin_course_home_1.domain.City
 import gb.kotlin_course_home_1.domain.Weather
 import gb.kotlin_course_home_1.model.dto.WeatherDTO
 import java.io.IOException
 
-fun interface RepositoryDetails {
-    fun getWeather(lat: Double, lon: Double, callback: MyLargeSuperCallback)
+fun interface RepositoryLocationToOneWeather {
+    fun getWeather(city: City, lat: Double, lon: Double, callback: MyLargeSuperCallback)
+}
+
+fun interface RepositoryAddable{
+    fun addWeather(weather: Weather)
+
 }
 
 interface MyLargeSuperCallback{
-    fun onResponse(weatherDTO: WeatherDTO)
+    fun onResponse(weather: Weather)
     fun onFailure(e: IOException)
 }
 
