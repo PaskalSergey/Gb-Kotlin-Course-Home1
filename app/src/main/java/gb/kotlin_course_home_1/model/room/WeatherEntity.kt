@@ -7,11 +7,11 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "weather_entity_table")
 data class WeatherEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Long,
-    val name: String,
-    val lat: Double,
-    val lon: Double,
-    var temperature: Int,
-    var condition: String,
-    var feelsLike: Int
+    val id: Long = 0,
+    val name: String = "",
+    val lat: Double = 1.0,
+    val lon: Double = 1.0,
+    var temperature: Int = 1,
+    var condition: String = "Облачно",
+    var feelsLike: Int = 1
 )

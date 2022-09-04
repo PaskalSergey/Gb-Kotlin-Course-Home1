@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Gb-Kotlin-Course-Home-1</string>
+
+    <string name="content_provider">Content provider</string>
+    <string name="authorities">weather.list.lesson9.provider</string>
+
     <string name="switch_button_text">Переключить список стран</string>
     <string name="error">Произошла ошибка</string>
     <string name="reload">Повторить</string>
